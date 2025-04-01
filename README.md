@@ -28,7 +28,8 @@ public static class GameSettings
 Basically, each parameter (it doesn't matter what type it is, is constructed with use of the following arguments:
 * **prefrencesKey** — this is a string key of a parameter (aka it's name). It must be unique per parameter;
 * **defaultValue**  — when there is no value (for this parameter) previously assigned by the player provided - this one will be returned;
-All you need is to provide **a unique name** for your parameter and a **default value* (if it's game first launch. That's all.
+
+All you need is to provide **a unique name** for your parameter and a **default value* (if it's game first launch). That's all.
 ## Step 2. Reading/writing parameter value.
 When you want to **get a value** of a certain parameter, you can do the following: 
 ```csharp
