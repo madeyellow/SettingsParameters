@@ -1,0 +1,17 @@
+{
+	"name": "madeyellow.settings-parameters",
+	"displayName": "SettingsParameters",
+	"version": "0.1.0",
+	"unity": "2019.1",
+	"author": {
+		"name": "MadeYellow",
+		"url": "https://github.com/madeyellow"
+	},
+	"description": "A robust & simple player preferences (settings) for Unity",
+	"dependencies": {
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/madeyellow/SettingsParameters.git"
+	}
+}
