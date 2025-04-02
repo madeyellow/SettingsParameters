@@ -9,7 +9,9 @@ namespace MadeYellow.SettingsParameters
     [System.Serializable]
     public class IntegerSettingsParameter : SettingsParameterBase<int>
     {
-        public IntegerSettingsParameter(string prefrencesKey, int defaultValue = 0) : base(prefrencesKey, defaultValue)
+        public IntegerSettingsParameter(string prefrencesKey,
+                                        int defaultValue = 0,
+                                        CommitStrategy commitStrategy = CommitStrategy.AutoCommit) : base(prefrencesKey, defaultValue, commitStrategy)
         {
         }
 

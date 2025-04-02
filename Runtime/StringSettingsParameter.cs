@@ -9,7 +9,9 @@ namespace MadeYellow.SettingsParameters
     [System.Serializable]
     public class StringSettingsParameter : SettingsParameterBase<string>
     {
-        public StringSettingsParameter(string prefrencesKey, string defaultValue = null) : base(prefrencesKey, defaultValue)
+        public StringSettingsParameter(string prefrencesKey,
+                                       string defaultValue = null,
+                                       CommitStrategy commitStrategy = CommitStrategy.AutoCommit) : base(prefrencesKey, defaultValue, commitStrategy)
         {
         }
 

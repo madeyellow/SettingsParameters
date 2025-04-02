@@ -12,7 +12,9 @@ namespace MadeYellow.SettingsParameters
     [System.Serializable]
     public class BooleanSettingsParameter : SettingsParameterBase<bool>
     {
-        public BooleanSettingsParameter(string prefrencesKey, bool defaultValue = false) : base(prefrencesKey, defaultValue)
+        public BooleanSettingsParameter(string prefrencesKey,
+                                        bool defaultValue = false,
+                                        CommitStrategy commitStrategy = CommitStrategy.AutoCommit) : base(prefrencesKey, defaultValue, commitStrategy)
         {
         }
 

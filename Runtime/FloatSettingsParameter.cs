@@ -9,7 +9,9 @@ namespace MadeYellow.SettingsParameters
     [System.Serializable]
     public class FloatSettingsParameter : SettingsParameterBase<float>
     {
-        public FloatSettingsParameter(string prefrencesKey, float defaultValue = 0f) : base(prefrencesKey, defaultValue)
+        public FloatSettingsParameter(string prefrencesKey,
+                                      float defaultValue = 0f,
+                                      CommitStrategy commitStrategy = CommitStrategy.AutoCommit) : base(prefrencesKey, defaultValue, commitStrategy)
         {
         }
 
