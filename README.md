@@ -4,7 +4,7 @@ A simple and easy-to-use wrapper around Unity's **PlayerPrefs** class, which all
 * Built-in **value caching** for maximum performance;
 * Auto reading of last saved value;
 Set this in pair lines of code - and you're ready to go!
-# How to install Trackable to my Unity project?
+# How to install SettingsParameters to my Unity project?
 Use the Unity Package Manager (in Unity’s top menu: **Window > Package Manager**), click "+" icon, select **"Add package from git URL"** and type URL of this repository.
 # Getting started
 To start using this library, you must firstly declare your parameters and then just use them.
