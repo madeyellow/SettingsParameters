@@ -8,12 +8,12 @@ namespace MadeYellow.SettingsParameters.Abstractions
     /// A base for generic settings paramters, that uses <see cref="PlayerPrefs"/> to read/write parameters
     /// </summary>
     /// <typeparam name="TValue">Type of value this parameter will hold</typeparam>
-    public abstract class SettingsParameterBase<TValue>
+    public abstract class SettingsParameterBase<TValue> : ISettingsParameter<TValue>
     {
         /// <summary>
         /// A string that will be used to read&write values from/to <see cref="PlayerPrefs"/>
         /// </summary>
-        protected readonly string Key;
+        public readonly string Key;
 
         /// <summary>
         /// Actual vale of that particular parameter
@@ -21,7 +21,7 @@ namespace MadeYellow.SettingsParameters.Abstractions
         private TValue _value;
 
         /// <summary>
-        /// Currently stored value of that particular parameter
+        /// Currently cached value of that particular parameter
         /// </summary>
         public TValue Value { get => _value; set => UpdateValue(value); }
 
@@ -39,6 +39,9 @@ namespace MadeYellow.SettingsParameters.Abstractions
         /// <summary>
         /// Invokes when a <see cref="Value"/> is saved via call of <see cref="Commit"/>
         /// </summary>
+        /// <remarks>
+        /// If you are using <see cref="CommitStrategy.ManualCommit"/> this event != to value being saved!
+        /// </remarks>
         public UnityEvent OnValueCommited => _onValueCommited;
         private readonly UnityEvent _onValueCommited = new UnityEvent();
 
@@ -72,7 +75,7 @@ namespace MadeYellow.SettingsParameters.Abstractions
         }
 
         /// <summary>
-        /// Same as calling setter of <see cref="Value"/>. Updates parameter's value and invokes event.
+        /// Same as calling setter of <see cref="Value"/>. Updates parameter's value and invokes <see cref="OnValueChanged"/> if value was changed.
         /// </summary>
         /// <param name="newValue"></param>
         /// <remarks>
@@ -81,7 +84,7 @@ namespace MadeYellow.SettingsParameters.Abstractions
         public void UpdateValue(TValue newValue)
         {
             // If values are null or they are equal (comparing by Equals() function)
-            if ((newValue == null && Value == null) || newValue.Equals(Value))
+            if (CheckIfValueIsSame(newValue))
             {
                 return;
             }
@@ -108,6 +111,27 @@ namespace MadeYellow.SettingsParameters.Abstractions
             IsValueChanged = false;
 
             _onValueCommited.Invoke();
+        }
+
+        /// <summary>
+        /// Returns true if new value aren't different from the<see cref="Value"/>
+        /// </summary>
+        /// <param name="newValue"></param>
+        /// <returns></returns>
+        public bool CheckIfValueIsSame(TValue newValue)
+        {
+            // If values are null or they are equal (comparing by Equals() function)
+            return (newValue == null && Value == null) || newValue.Equals(Value);
+        }
+
+        /// <summary>
+        /// Creates new <see cref="DebouncedSettingsParameter"/> and sends this parameter into it
+        /// </summary>
+        /// <param name="debounceTimeout">How many milliseconds must pass from last <see cref="Value"/> update before <see cref="Commit"/> will be triggered</param>
+        /// <returns></returns>
+        public DebouncedSettingsParameter<TValue> ToDebounced(int debounceTimeout)
+        {
+            return new DebouncedSettingsParameter<TValue>(this, debounceTimeout);
         }
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace MadeYellow.SettingsParameters
 
         protected override void WriteValue()
         {
-            PlayerPrefs.SetFloat(Key, Convert(Value));
+            PlayerPrefs.SetInt(Key, Convert(Value));
         }
 
         private int Convert(bool value)
