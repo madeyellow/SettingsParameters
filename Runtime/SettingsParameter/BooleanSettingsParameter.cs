@@ -37,5 +37,13 @@ namespace MadeYellow.SettingsParameters
         {
             return value == 1 ? true : false;
         }
+
+        /// <summary>
+        /// Inverts value of parameter ("checkbox" behavior)
+        /// </summary>
+        public void Toggle()
+        {
+            Value = !Value;
+        }
     }
 }
