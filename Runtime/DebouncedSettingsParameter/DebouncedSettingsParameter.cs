@@ -3,7 +3,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace MadeYellow.SettingsParameters
 {
@@ -45,12 +44,12 @@ namespace MadeYellow.SettingsParameters
         /// <summary>
         /// Invokes when <see cref="Value"/> changes (but not yet saved)
         /// </summary>
-        public UnityEvent OnValueChanged => _parameter.OnValueChanged;
+        public event Action OnValueChanged;
 
         /// <summary>
         /// Invokes when a <see cref="Value"/> is saved
         /// </summary>
-        public UnityEvent OnValueCommited => _parameter.OnValueCommited;
+        public event Action OnValueCommited;
 
         /// <summary>
         /// This is a thing required to sync to the main thread
@@ -75,6 +74,9 @@ namespace MadeYellow.SettingsParameters
                 throw new ArgumentOutOfRangeException(string.Format("Debounce timeout must be greater than zero!"));
 
             _mainThreadContext = SynchronizationContext.Current;
+
+            _parameter.OnValueChanged += OnValueChangedSubscription;
+            _parameter.OnValueCommited += OnValueCommitedSubscription;
         }
 
         /// <summary>
@@ -128,9 +130,20 @@ namespace MadeYellow.SettingsParameters
         private void DebouncedValue()
         {
             // Sync to the main thread ('cause save methods will work only there)
-            _mainThreadContext.Post(new SendOrPostCallback((o) => {
+            _mainThreadContext.Post(new SendOrPostCallback((o) =>
+            {
                 _parameter.Commit();
             }), null);
+        }
+
+        private void OnValueChangedSubscription()
+        {
+            OnValueChanged?.Invoke();
+        }
+
+        private void OnValueCommitedSubscription()
+        {
+            OnValueCommited?.Invoke();
         }
     }
 }

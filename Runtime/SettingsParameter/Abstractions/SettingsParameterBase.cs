@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace MadeYellow.SettingsParameters.Abstractions
 {
@@ -33,8 +32,7 @@ namespace MadeYellow.SettingsParameters.Abstractions
         /// <summary>
         /// Invokes when <see cref="Value"/> changes
         /// </summary>
-        public UnityEvent OnValueChanged => _onValueChanged;
-        private readonly UnityEvent _onValueChanged = new UnityEvent();
+        public event Action OnValueChanged;
 
         /// <summary>
         /// Invokes when a <see cref="Value"/> is saved via call of <see cref="Commit"/>
@@ -42,8 +40,7 @@ namespace MadeYellow.SettingsParameters.Abstractions
         /// <remarks>
         /// If you are using <see cref="CommitStrategy.ManualCommit"/> this event != to value being saved!
         /// </remarks>
-        public UnityEvent OnValueCommited => _onValueCommited;
-        private readonly UnityEvent _onValueCommited = new UnityEvent();
+        public event Action OnValueCommited;
 
         /// <summary>
         /// Current way of triggering a Write() method
@@ -94,7 +91,7 @@ namespace MadeYellow.SettingsParameters.Abstractions
 
             IsValueChanged = true;
 
-            _onValueChanged.Invoke();
+            OnValueChanged?.Invoke();
         }
 
         /// <summary>
@@ -110,7 +107,7 @@ namespace MadeYellow.SettingsParameters.Abstractions
 
             IsValueChanged = false;
 
-            _onValueCommited.Invoke();
+            OnValueCommited?.Invoke();
         }
 
         /// <summary>
@@ -153,12 +150,12 @@ namespace MadeYellow.SettingsParameters.Abstractions
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void OnCommitStrategyChanged()
         {
-            _onValueChanged.RemoveListener(Commit);
+            OnValueCommited -= Commit;
 
             switch (SelectedCommitStrategy)
             {
                 case CommitStrategy.AutoCommit:
-                    _onValueChanged.AddListener(Commit);
+                    OnValueChanged += Commit;
                     break;
 
                 case CommitStrategy.ManualCommit:

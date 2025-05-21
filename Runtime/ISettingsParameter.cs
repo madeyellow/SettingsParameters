@@ -1,4 +1,4 @@
-using UnityEngine.Events;
+using System;
 
 namespace MadeYellow.SettingsParameters
 {
@@ -16,6 +16,6 @@ namespace MadeYellow.SettingsParameters
         /// <summary>
         /// Invokes when parameter's value is saved
         /// </summary>
-        UnityEvent OnValueCommited { get; }
+        event Action OnValueCommited;
     }
 }
