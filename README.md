@@ -1,4 +1,4 @@
-# What is it?
+# ❓ What is it?
 A simple and easy-to-use wrapper around Unity's **PlayerPrefs** class, which allows you to read/write TYPED settings. **WHAT DOES IT MEAN?** You'll be able to read not only string prefrences with a single lnie of code, but also:
 * int, float;
 * bool;
@@ -9,9 +9,9 @@ In addition you'll also gain **some more feature** as:
 * Built-in **value caching** for maximum performance;
 * Auto reading of last saved value;
 Set this in pair lines of code - and you're ready to go!
-# How to install SettingsParameters to my Unity project?
+# 💾 How to install SettingsParameters to my Unity project?
 Use the Unity Package Manager (in Unity’s top menu: **Window > Package Manager**), click "+" icon, select **"Add package from git URL"** and type URL of this repository.
-# Getting started
+# 🚀 Getting started
 To start using this library, you must firstly declare your parameters and then just use them.
 ## Step 1. Declare your parameters.
 In the example below, I showed a static class with 2 parameters: **Camera rotation speed** and **Camera axis inversion flag**. If you want to see the list of all implemented parameters and how to use them — scroll to the next section.
@@ -58,8 +58,9 @@ private void ExampleOfSettingValueIntoTheParameter(float value)
     GameSettings.CameraRotationSpeed.Value = value;
 }
 ```
-Next time when you'll ask for that parameter's value it will return the last one you've (player) have left it there! Even after game restart! Or even after it's deletition. All thanks to internal use of Unity's **PlayerPrefs**.
-# Supported types
+Next time when player will ask for that parameter's value it will return the last one player set up!
+Even after *game restart*! Or even after *game reinstalling*! All thanks to internal use of Unity's **PlayerPrefs**.
+# ✅ Supported types
 We already have implemented several parameter types:
 * **int** — use *IntegerSettingsParameter*;
 * **float** — use *FloatSettingsParameter*;
@@ -67,7 +68,7 @@ We already have implemented several parameter types:
 * **string** — use *StringSettingsParameter*;
  
 If you want to have a custom type you may either implement it yourself (it's fairly easy, jsut look at the source code) or create as issue and I'll do it and add to the library (if it'll be usefull for others).
-# Change tracking
+# 🆕 Change tracking
 If you want to, you may use a built-in event that triggers each time a **Value** of parameter changes (except reading the value during construction).
 ```csharp
 private void ExampleOfUsingTheChangeEvent()
@@ -78,7 +79,7 @@ private void ExampleOfUsingTheChangeEvent()
     });
 }
 ```
-# Recomendations
+# 🏆 Recomendations
 ## Use meaningfull names
 Use a **prefrencesKey** that holds some meaning. Don't use spaces. It's just in case if you'll decide to remove that library and use **PlayerPrefs** yourself - this way your palyer's won't loose any settings they set up (in case you'll reuse same keys).
 ## Performance considerations
