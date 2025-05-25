@@ -1,5 +1,10 @@
 # What is it?
-A simple and easy-to-use wrapper around Unity's **PlayerPrefs** class, which allows you to read/write TYPED settings. In addition you'll also gain:
+A simple and easy-to-use wrapper around Unity's **PlayerPrefs** class, which allows you to read/write TYPED settings. **WHAT DOES IT MEAN?** You'll be able to read not only string prefrences with a single lnie of code, but also:
+* int, float;
+* bool;
+* etc.;
+
+In addition you'll also gain **some more feature** as:
 * Value **change event** for extra usability;
 * Built-in **value caching** for maximum performance;
 * Auto reading of last saved value;
@@ -29,7 +34,7 @@ Basically, each parameter (it doesn't matter what type it is, is constructed wit
 * **prefrencesKey** — this is a string key of a parameter (aka it's name). It must be unique per parameter;
 * **defaultValue**  — when there is no value (for this parameter) previously assigned by the player provided - this one will be returned;
 
-All you need is to provide **a unique name** for your parameter and a **default value* (if it's game first launch). That's all.
+All you need is to provide **a unique name** for your parameter and a **default value* (if will be fetched on game first launch OR each time before user will reassign value of it). That's all!
 ## Step 2. Reading/writing parameter value.
 When you want to **get a value** of a certain parameter, you can do the following: 
 ```csharp
@@ -58,7 +63,7 @@ Next time when you'll ask for that parameter's value it will return the last one
 We already have implemented several parameter types:
 * **int** — use *IntegerSettingsParameter*;
 * **float** — use *FloatSettingsParameter*;
-* **bool** — use *BooleanSettingsParameter*;
+* **bool** — use *BooleanSettingsParameter*. It also supports `Toggle()` method for checkbox like behavior;
 * **string** — use *StringSettingsParameter*;
  
 If you want to have a custom type you may either implement it yourself (it's fairly easy, jsut look at the source code) or create as issue and I'll do it and add to the library (if it'll be usefull for others).
