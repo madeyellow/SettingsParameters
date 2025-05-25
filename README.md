@@ -1,5 +1,5 @@
 # What is it?
-A simple and easy-to-use wrapper around Unity's **PlayerPrefs** class, which allows you to read/write settings. In addition you'll also gain:
+A simple and easy-to-use wrapper around Unity's **PlayerPrefs** class, which allows you to read/write TYPED settings. In addition you'll also gain:
 * Value **change event** for extra usability;
 * Built-in **value caching** for maximum performance;
 * Auto reading of last saved value;
